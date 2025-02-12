@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your-repo.git'  // Replace with your repository URL
+                git 'https://github.com/ansh142536/SL-CICD-MAVEN-18-JAN.git'  // Replace with your repository URL
             }
         }
 
