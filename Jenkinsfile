@@ -1,49 +1,36 @@
-pipeline
-{
-	agent any
-	tools
-	{
-		maven 'MAVEN_HOME'
-	}
-	stages
-	{
-		stage('Welcome Stage')
-		{	
-			steps
-			{
-				echo 'Welcome to Jenkins Pipeline'				
-			}
-		}
-		stage('Clean Stage')
-		{	
-			steps
-			{
-				bat 'mvn clean'
-			}
-		}
-		stage('Test Stage')
-		{	
-			steps
-			{
-				bat 'mvn test'
-			}
-		}
-		
-		stage('Build Stage')
-		{	
-			steps
-			{
-				bat 'mvn install'
-			}
-		}
-		stage('Final Stage')
-		{	
-			steps
-			{
-				echo 'Final Stage'
-			}
-		}
-		
-	}
+pipeline {
+    agent any
+    
+    tools {
+        maven 'local_maven'  // Name of the Maven installation in Jenkins
+        jdk 'JDK'      // Name of the JDK installation in Jenkins
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/your-repo.git'  // Replace with your repository URL
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying application...'
+                // Add deployment steps if needed
+            }
+        }
+    }
 }
-		
+
